@@ -34,5 +34,6 @@ import { ExceptionsLoggerFilter } from './utils/exceptionsLogger.filter';
       provide: APP_FILTER,
       useClass: ExceptionsLoggerFilter,
     },
-  ],})
+  ],
+})
 export class AppModule {}
