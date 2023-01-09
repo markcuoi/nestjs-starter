@@ -10,6 +10,7 @@ import {
   Req,
   UseInterceptors,
   ClassSerializerInterceptor,
+  Query,
 } from '@nestjs/common';
 import PostsService from './posts.service';
 import CreatePostDto from './dto/createPost.dto';
@@ -21,9 +22,7 @@ import RequestWithUser from '../authentication/requestWithUser.interface';
 @Controller('posts')
 @UseInterceptors(ClassSerializerInterceptor)
 export default class PostsController {
-  constructor(
-    private readonly postsService: PostsService
-  ) {}
+  constructor(private readonly postsService: PostsService) {}
 
   @Get()
   getAllPosts() {
@@ -42,7 +41,10 @@ export default class PostsController {
   }
 
   @Patch(':id')
-  async updatePost(@Param() { id }: FindOneParams, @Body() post: UpdatePostDto) {
+  async updatePost(
+    @Param() { id }: FindOneParams,
+    @Body() post: UpdatePostDto,
+  ) {
     return this.postsService.updatePost(Number(id), post);
   }
 

@@ -7,7 +7,8 @@ import {
   Patch,
   UseGuards,
   UseInterceptors,
-  ClassSerializerInterceptor, Post,
+  ClassSerializerInterceptor,
+  Post,
 } from '@nestjs/common';
 import CategoriesService from './categories.service';
 import CreateCategoryDto from './dto/createCategory.dto';
@@ -18,9 +19,7 @@ import FindOneParams from '../utils/findOneParams';
 @Controller('categories')
 @UseInterceptors(ClassSerializerInterceptor)
 export default class CategoriesController {
-  constructor(
-    private readonly categoriesService: CategoriesService
-  ) {}
+  constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
   getAllCategories() {
@@ -39,7 +38,10 @@ export default class CategoriesController {
   }
 
   @Patch(':id')
-  async updateCategory(@Param() { id }: FindOneParams, @Body() category: UpdateCategoryDto) {
+  async updateCategory(
+    @Param() { id }: FindOneParams,
+    @Body() category: UpdateCategoryDto,
+  ) {
     return this.categoriesService.updateCategory(Number(id), category);
   }
 
